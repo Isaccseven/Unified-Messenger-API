@@ -1,4 +1,4 @@
-package de.lucahenn.multichannel.domain.auth;
+package de.lucahenn.unifiedmessenger.domain.auth;
 
 import lombok.Data;
 

@@ -1,13 +1,9 @@
-package de.lucahenn.multichannel.domain.auth;
+package de.lucahenn.unifiedmessenger.domain.auth;
 
-import it.auties.whatsapp.api.PairingCodeHandler;
 import it.auties.whatsapp.api.QrHandler;
 import it.auties.whatsapp.api.Whatsapp;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Arrays;
 
 
 public class WhatsappService {

@@ -1,13 +1,11 @@
-package de.lucahenn.multichannel.application;
+package de.lucahenn.unifiedmessenger.application;
 
-import de.lucahenn.multichannel.domain.auth.Login;
-import de.lucahenn.multichannel.domain.auth.WhatsappService;
+import de.lucahenn.unifiedmessenger.domain.auth.WhatsappService;
 import it.auties.whatsapp.api.*;
 import it.auties.whatsapp.model.chat.Chat;
 import it.auties.whatsapp.model.info.MessageInfo;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
