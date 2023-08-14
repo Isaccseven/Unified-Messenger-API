@@ -1,36 +1,37 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
-
-name: Java CI with Gradle
+name: Gradle Build with GraalVM
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master # Trigger the action only on master branch
   pull_request:
-    branches: [ "master" ]
-
-permissions:
-  contents: read
+    branches:
+      - master # Also trigger on pull requests to master
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: graalvm/setup-graalvm@v1
-        with:
-          java-version: '17.0.7'
-          distribution: 'graalvm' # See 'Options' for all available distributions
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Example step
-        run: |
-          echo "GRAALVM_HOME: $GRAALVM_HOME"
-          echo "JAVA_HOME: $JAVA_HOME"
-          java --version
-          native-image --version
-      - name: Example step using Gradle plugin # https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
-        run: gradlew nativeCompile
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - uses: graalvm/setup-graalvm@v1
+      with:
+        java-version: '17.0.7' # for a specific JDK 17; or '17' for the latest JDK 17
+        distribution: 'graalvm' # New 'distribution' option
+
+    - name: Set up environment for GraalVM
+      run: |
+        echo "JAVA_HOME=${JAVA_HOME}" >> $GITHUB_ENV
+        echo "PATH=${JAVA_HOME}/bin:${PATH}" >> $GITHUB_ENV
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build with Gradle
+      run: ./gradlew build
+
+    # Optional: If you want to run tests or any other tasks, you can add them similarly
+    #- name: Test with Gradle
+    #  run: ./gradlew test
