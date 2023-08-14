@@ -18,17 +18,30 @@ configurations {
     }
 }
 
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation('org.springframework.boot:spring-boot-starter-web'){
+        exclude group: 'org.slf4j', module: '*'
+        exclude group: 'ch.qos.logback',module: 'logback-classic'
+        exclude group: 'org.apache.logging.log4j', module: '*'
+    }
+    implementation 'org.jsoup:jsoup:1.16.1'
+    implementation 'com.github.auties00:whatsappweb4j:3.5.1'
+    implementation('org.springframework:spring-core') {
+        exclude group: 'commons-logging', module: 'commons-logging'
+    }
+
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 
 tasks.named('test') {
